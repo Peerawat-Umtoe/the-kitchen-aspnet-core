@@ -1,0 +1,149 @@
+﻿@model IEnumerable<the_kitchen_aspnet_core.Models.Cart>
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+            <div class="cart-page">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+
+                            <!-- Cart Bar -->
+                            <div class="cart-bar">
+                                <ul
+                                    class="cart-bar-list item-list d-flex flex-row align-items-center justify-content-end">
+                                    <li class="mr-auto">Product</li>
+                                    <li>Price</li>
+                                    <li>Quantity</li>
+                                    <li>Total</li>
+                                </ul>
+                            </div>
+
+                            <!-- Cart Items -->
+                            <div class="cart-items">
+                                <ul class="cart-items-list">
+                                    @foreach (var item in Model) {
+                                    <!-- Cart Item -->
+                                    <li
+                                        class="cart-item item-list d-flex flex-row align-items-center justify-content-start">
+                                        <div
+                                            class="cart-product d-flex flex-md-row flex-column align-items-center justify-content-start mr-auto">
+                                            <div>
+                                                <div class="cart-product-image"><img src="~/img-products/@Html.DisplayFor(modelItem => item.Products.Image)" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="cart-product-name-container">
+                                                <div class="cart-product-name"><a href="/Product/@item.ProductId">@Html.DisplayFor(modelItem => item.Products.Name)</a></div>
+                                                <div class="cart-product-text cart-product-category">In <a href="/Home/@item.Products.CategoryId">@item.Products.Categories.Name</a></div>
+                                            </div>
+                                        </div>
+                                        <div class="cart-product-price cart-product-text">@Html.DisplayFor(modelItem => item.Products.Price)</div>
+                                        <div class="cart-product-quantity-container">
+                                            <div class="cart-product-quantity ml-auto mr-auto text-center">
+                                                <span class="cart-product-text cart-product-quantity-number">@Html.DisplayFor(modelItem => item.Quantity)</span>
+                                                <div class="cart-quantity-sub cart-quantity-button text-center">
+                                                    <span><a asp-controller="Cart" asp-action="subQuantity" asp-route-id="@item.CartId">-</a></span>
+                                                </div>
+                                                <div class="cart-quantity-add cart-quantity-button text-center">
+                                                    <span><a asp-controller="Cart" asp-action="addQuantity" asp-route-id="@item.CartId">+</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cart-product-total cart-product-text">@(item.Quantity*@item.Products.Price)</div>
+                                    </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="cart-process-form" method="post">
+                        <div class="row cart-process">
+                            <div class="col-lg-6">
+                                <div class="cart-process-content">
+                                    <div class="cart-process-title">Shipping Address</div>
+                                    <div class="cart-process-address">
+                                        <div class="cart-process-form">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <input type="text" id="firstname" name="firstname"
+                                                        class="cart-process-input" placeholder="Firstname"
+                                                        required="required" autocomplete="off">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" id="lastname" name="lastname"
+                                                        class="cart-process-input" placeholder="Lastname"
+                                                        required="required" autocomplete="false">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <input type="phone" id="phone" name="phone" class="cart-process-input"
+                                                    placeholder="Phonenumber" required="required" autocomplete="off">
+                                            </div>
+                                            <div>
+                                                <input type="email" id="email" name="email" class="cart-process-input"
+                                                    placeholder="Email" required="required" autocomplete="off">
+                                            </div>
+                                            <div>
+                                                <input type="text" id="address" name="address"
+                                                    class="cart-process-input" placeholder="Address" required="required"
+                                                    autocomplete="off">
+                                            </div>
+                                            <div>
+                                                <input type="text" id="zipcode" name="zipcode"
+                                                    class="cart-process-input" placeholder="Zipcode" required="required"
+                                                    autocomplete="off">
+                                            </div>
+                                            <div>
+                                                <select id="province" name="province"
+                                                    class="cart-dropdown-item-select cart-process-input"
+                                                    require="required">
+                                                    <option value="">Province</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="cart-process-content">
+                                    <div class="cart-process-title">Shipping Method</div>
+                                    <div class="shipping">
+                                        <ul>
+                                            <li
+                                                class="shipping-option d-flex flex-row align-items-center justify-content-between">
+                                                <label class="cart-process-radio-container"><input type="radio"
+                                                        id="radio_1" name="delivery" value="jt"
+                                                        class="cart-process-radio" checked><span
+                                                        class="cart-process-radio-mark"></span><span
+                                                        class="cart-process-radio-text">J&T Express
+                                                        Thailand </span>
+                                                </label>
+                                                <div class="cart-process-shipping-price ml-auto jt-price">฿50.00
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="cart-process-title">Shipping Total</div>
+                                    <ul class="cart-process-total">
+                                        <li class="d-flex flex-row align-items-center justify-content-start">
+                                            <div class="cart-process-total-title">Total product price</div>
+                                            <div class="cart-process-total-price ml-auto items-price">60.00</div>
+                                        </li>
+                                        <li class="d-flex flex-row align-items-center justify-content-start">
+                                            <div class="cart-process-total-title">Shipping cost</div>
+                                            <div class="cart-process-total-price ml-auto shipping-price">50.00</div>
+                                        </li>
+                                        <li class="d-flex flex-row align-items-center justify-content-start">
+                                            <div class="cart-process-total-title">Total</div>
+                                            <div class="cart-process-total-price ml-auto total-price">120.00</div>
+                                        </li>
+                                    </ul>
+                                    <div class="cart-checkout-button"><a href="#"><i class="fa fa-shopping-cart"></i>
+                                            Checkout</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>

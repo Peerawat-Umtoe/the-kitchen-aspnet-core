@@ -1,0 +1,99 @@
+﻿@model IEnumerable<the_kitchen_aspnet_core.Models.Product>
+@{
+    ViewData["Title"] = "Home";
+}
+
+            <div class="products">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div
+                                class="products-bar d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-start justify-content-center">
+                                <div class="products-bar-links">
+                                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                                        <li class="active"><a href="#">All</a></li>
+                                        <li><a href="#">Hot Products</a></li>
+                                        <li><a href="#">New Products</a></li>
+                                        <li><a href="#">Sale Products</a></li>
+                                    </ul>
+                                </div>
+                                @*<div class="d-flex flex-row align-items-center justify-content-start ml-lg-auto">
+                                    <div class="products-dropdown product-dropdown-sorting">
+                                        <div class="isotope-sorting-text"><span>Default Sorting</span><i
+                                                class="fa fa-caret-down" aria-hidden="true"></i></div>
+                                        <ul>
+                                            <li class="" data-isotope-option='{ "sortBy": "original" }'>
+                                                Default</li>
+                                            <li class="" data-isotope-option='{ "sortBy": "price" }'>
+                                                Price</li>
+                                            <li class="" data-isotope-option='{ "sortBy": "name" }'>Name
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="products-dropdown text-right product-dropdown-filter">
+                                        <div class="isotope-filter-text"><span>Filter</span><i class="fa fa-caret-down"
+                                                aria-hidden="true"></i></div>
+                                        <ul>
+                                            <li class="" data-filter="*">All</li>
+                                            <li class="" data-filter=".hot">Hot</li>
+                                            <li class="" data-filter=".new">New</li>
+                                            <li class="" data-filter=".sale">Sale</li>
+                                        </ul>
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        @foreach (var item in Model) {
+                        <!-- Product -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="product">
+                                <div class="product-image" style="border:solid 2px #dbdbdb;"><a asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@item.ProductId"><img
+                                        src="~/img-products/@Html.DisplayFor(modelItem => item.Image)" alt=""></a></div>
+                                <div class="product-content">
+                                    <div class="product-info d-flex flex-row align-items-start justify-content-start">
+                                        <div>
+                                            <div>
+                                                <div class="product-name"><a asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@item.ProductId">@Html.DisplayFor(modelItem => item.Name)</a></div>
+                                                <div class="product-category">In <a href="/Home/@item.CategoryId">@Html.DisplayFor(modelItem => item.Categories.Name)</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-auto text-right">
+                                            <div class="product-price text-right">@Html.DisplayFor(modelItem => item.Price)</div>
+                                        </div>
+                                    </div>
+                                    <div class="product-buttons">
+                                        <div class="text-right d-flex flex-row align-items-start justify-content-start">
+                                            <div
+                                                class="product-button text-center d-flex flex-column align-items-center justify-content-center">
+                                                <div>
+                                                    <div><img src="~/svg/cart.svg" class="svg" alt="">
+                                                        <div>+</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+@*
+            <div class="row page-nav-row">
+                <div class="col">
+                    <div class="page-nav">
+                        <ul class="d-flex flex-row align-items-start justify-content-center">
+                            <li class="active"><a href="#">01</a></li>
+                            <li><a href="#">02</a></li>
+                            <li><a href="#">03</a></li>
+                            <li><a href="#">04</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>*@

@@ -1,0 +1,58 @@
+﻿@model the_kitchen_aspnet_core.Models.Product
+
+@{
+    ViewData["Title"] = "Product";
+}
+
+           <div class="product-detail-page">
+                <div class="container">
+                    <div class="row">
+
+                        <!-- Product Image -->
+                        <div class="col-lg-6">
+                            <div class="product-detail-image">
+                                <img src="~/img-products/@Model.Image" />
+                            </div>
+                        </div>
+
+                        <!-- Product Info -->
+                        <div class="col-lg-6">
+                            <div class="product-detail-info">
+                                <div class="product-detail-name">@Model.Name</div>
+                                <div class="product-detail-category">In <a href="/Home/@Model.CategoryId">@Model.Categories.Name</a></div>
+                                <div class="product-detail-price">@Model.Price</div>
+                                <div class="product-detail-text">
+                                    <p>@Html.Raw(@Model.Description)</p>
+                                </div>
+                                <form asp-action="AddProductToCart">
+                                <div class="product-buttons">
+                                    <div class="text-right d-flex flex-row align-items-start justify-content-start">
+                            @if(@Model.Amount > 0)
+                            {
+                                                           <div
+                                            class="product-button text-center d-flex flex-column align-items-center justify-content-center">
+                                            <div>
+                                                <div><img src="~/svg/cart.svg" class="svg" alt="">
+                                                    <div>+</div>
+                                                </div>
+                                            </div>
+                                </div>
+                            }else if(@Model.Amount == 0)
+                            {
+                                                                        <div
+                                            class="product-button-sold-out text-center d-flex flex-column align-items-center justify-content-center">
+                                            <div>
+                                                <div>SOLD OUT
+                                                </div>
+                                            </div>
+                                        </div>
+                            }
+
+                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

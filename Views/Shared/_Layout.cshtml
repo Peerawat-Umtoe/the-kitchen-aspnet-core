@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewData["Title"] - The Kitchen</title>
+    <link rel="stylesheet" type="text/css" href="~/css/font-icon.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/css/layout.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/css/header.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/css/main.css" asp-append-version="true">
+    <link rel="stylesheet" type="text/css" href="~/css/responsive.css" asp-append-version="true"> 
+</head>
+<body>
+    <div class="menu">
+        <div class="menu-nav">
+            <ul>
+                <li class="@(@ViewBag.action == "CookwareAndCookingCutlery" ? "active" : "")"><a asp-area="" asp-controller="Home" asp-action="CookwareAndCookingCutlery">Cookware & Cooking cutlery</a></li>
+                <li class="@(@ViewBag.action == "DiningAndKitchenTextile" ? "active" : "")"><a asp-area="" asp-controller="Home" asp-action="DiningAndKitchenTextile">Dining & Kitchen textile</a></li>
+                <li class="@(@ViewBag.action == "DiningWare" ? "active" : "")"><a asp-area="" asp-controller="Home" asp-action="DiningWare">Dining Ware</a></li>
+                <li class="@(@ViewBag.action == "FoodStorage" ? "active" : "")"><a asp-area="" asp-controller="Home" asp-action="FoodStorage">Food Storage</a></li>
+                <li class="@(@ViewBag.action == "KitchenStorageUtility" ? "active" : "")"><a asp-area="" asp-controller="Home" asp-action="KitchenStorageUtility">Kitchen storage & Utility</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header class="header">
+            <div class="header-overlay"></div>
+            <div class="header-content d-flex flex-row align-items-center justify-content-start">
+                <div class="logo">
+                    <a href="/">
+                        <div class="d-flex flex-row align-items-center justify-content-start">
+                            <div>The Kitchen</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                <nav class="main-nav">
+                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                        <li class="@(@ViewBag.action == "CookwareAndCookingCutlery" ? "active" : "")"><a asp-area="" asp-controller="Home" asp-action="CookwareAndCookingCutlery" style="font-size: 14px;">Cookware & Cooking cutlery</a></li>
+                        <li class="@(@ViewBag.action == "DiningAndKitchenTextile" ? "active" : "")"><a asp-area="" asp-controller="Home" asp-action="DiningAndKitchenTextile" style="font-size: 14px;">Dining & Kitchen textile</a></li>
+                        <li class="@(@ViewBag.action == "DiningWare" ? "active" : "")"><a asp-area="" asp-controller="Home" asp-action="DiningWare"  style="font-size: 14px;">Dining Ware</a></li>
+                        <li class="@(@ViewBag.action == "FoodStorage" ? "active" : "")"><a asp-area="" asp-controller="Home" asp-action="FoodStorage"  style="font-size: 14px;">Food Storage</a></li>
+                        <li class="@(@ViewBag.action == "KitchenStorageUtility" ? "active" : "")"><a asp-area="" asp-controller="Home" asp-action="KitchenStorageUtility"  style="font-size: 14px;">Kitchen storage & Utility</a></li>
+                    </ul>
+                </nav>
+                <div class="d-flex flex-row align-items-center justify-content-start ml-auto">
+                    <div class="user"><a href="#">
+                            <div><img class="svg" src="~/svg/user.svg" alt="">
+                                <div>1</div>
+                            </div>
+                        </a></div>
+                    <div class="cart"><a asp-area="" asp-controller="Cart" asp-action="Index">
+                            <div><img class="svg" src="~/svg/cart.svg" alt="">
+                                <div>1</div>
+                            </div>
+                        </a></div>
+                </div>
+                <partial name="_LoginPartial" />
+            </div>
+        </header>
+        <div class="main-content-inner">
+            <div class="main-content-overlay"></div>
+
+            <div class="page">
+                <div class="page-container">
+                    <div class="page-content text-center">
+                        <div class="page-title">  
+                           @if(@ViewBag.action == "Home")
+                            {                 
+                                @("The Kitchen")
+                            }else{                          
+                                @(ViewBag.pageView)
+                            }
+                            </div>
+                    </div>
+                    <div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
+                        <ul class="d-flex flex-row align-items-start justify-content-start text-center">
+
+                            
+                            @if(@ViewBag.action != "Home")
+                            {
+                                 <li><a href="/">Home</a></li>
+                                <li>@ViewBag.pageView</li>
+                            }
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+             @RenderBody()
+
+        </div>
+
+    </div>
+    <script src="~/js/index.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
